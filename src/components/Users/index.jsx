@@ -26,12 +26,12 @@ class Users extends Component {
     this.props.fetchUsersList();
   }
 
-  goToProfile = () => {
-    return <a href="/profile">Go to profile</a>;
+  goToProfile = (userId) => {
+    return <a href={`/profile/${userId}`}>Go to profile</a>;
   };
 
   panelMapRender = (user, index) => (
-    <Panel header={user.name} key={index} extra={this.goToProfile()}>
+    <Panel header={user.name} key={index} extra={this.goToProfile(user.id)}>
       <p>
         <UserOutlined title="Username" className="user-list-icon" />
         {user.username} <br />
