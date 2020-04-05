@@ -3,7 +3,7 @@ import { Route, Switch, Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
 import Layout from "../components/common/layout";
-import Posts from "../components/Posts";
+import Profile from "../components/Profile";
 import Users from "../components/Users";
 
 const browserHistory = createBrowserHistory();
@@ -14,8 +14,8 @@ export default class Routes extends Component {
       <Router history={browserHistory}>
         <Switch>
           <Layout>
-            <Route path={["/", "/users"]} component={Users} />
-            <Route path="/posts" component={Posts} />
+            <Route exact path={["/", "/users"]} component={Users} />
+            <Route path="/profile" component={Profile} />
           </Layout>
         </Switch>
       </Router>
