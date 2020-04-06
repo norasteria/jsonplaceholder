@@ -30,11 +30,11 @@ class Profile extends Component {
     const { userProfile } = this.props;
 
     return (
-      <p>
+      <div>
         <h3>{userProfile.name}</h3>
         <div>Email: {userProfile.email}</div>
         <div>Phone number: {userProfile.phone}</div>
-      </p>
+      </div>
     );
   };
 
