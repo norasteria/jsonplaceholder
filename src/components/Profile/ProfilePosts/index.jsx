@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { Card, Spin, Button, Divider } from "antd";
 
-import "./ProfilePosts.css";
+import "./index.css";
 import CommentForm from "./CommentForm";
-import { fetchPosts, fetchComments } from "./profile.action";
+import { fetchPosts, fetchComments } from "../profile.action";
 import {
   userPosts as selectPosts,
   userPostsLoading as selectLoading,
   userComments as selectComment,
-} from "./profile.selector";
+} from "../profile.selector";
 
 const mapActionToProps = { fetchPosts, fetchComments };
 
