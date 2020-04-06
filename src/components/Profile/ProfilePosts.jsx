@@ -5,6 +5,7 @@ import { compose } from "redux";
 import { Card, Spin, Button, Divider } from "antd";
 
 import "./ProfilePosts.css";
+import CommentForm from "./CommentForm";
 import { fetchPosts, fetchComments } from "./profile.action";
 import {
   userPosts as selectPosts,
@@ -52,9 +53,19 @@ class ProfilePosts extends Component {
               <Divider />
             </div>
           ))}
+
+        {this.state.showAddCommentForm ? (
+          <CommentForm onCancel={this.onCommentFormCancel} />
+        ) : (
+          <Button onClick={this.addNewCommentOnClick}>Add Comment</Button>
+        )}
       </Card>
     );
   };
+
+  addNewCommentOnClick = () => this.setState({ showAddCommentForm: true });
+
+  onCommentFormCancel = () => this.setState({ showAddCommentForm: false });
 
   commentOnClick = (postId) => {
     let { selectedPostId } = this.state;
