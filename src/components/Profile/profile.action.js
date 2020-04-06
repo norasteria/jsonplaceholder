@@ -1,12 +1,16 @@
 import { Api, endpoints } from "../../module/API";
 import getUserData from "../../module/general-services/getUserData";
 
-import { getProfile, setPageLoading } from "./profile.reducer";
+import { getProfile, setPageLoading, getPosts } from "./profile.reducer";
 
 export const fetchPosts = (params) => (dispatch) => {
-  Api.get(endpoints.posts, { params }).then(({ data }) => {
-    //
-  });
+  dispatch(setPageLoading({ posts: true }));
+
+  Api.get(endpoints.posts, { params })
+    .then(({ data }) => {
+      dispatch(getPosts(data));
+    })
+    .finally(() => dispatch(setPageLoading({ posts: false })));
 };
 
 export const fetchSelectedUserDetail = (params) => (dispatch) => {

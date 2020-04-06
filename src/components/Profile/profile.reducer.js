@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   comments: [],
   loading: {
     mainPage: false,
-    profile: false,
+    posts: false,
     album: false,
   },
 };
@@ -23,8 +23,9 @@ export default createReducer(
   {
     [getProfile]: (state, payload) =>
       update(state, { userProfile: { $set: payload } }),
+    [getPosts]: (state, payload) => update(state, { posts: { $set: payload } }),
   },
   INITIAL_STATE
 );
 
-export { getProfile, setPageLoading };
+export { getProfile, setPageLoading, getPosts };
