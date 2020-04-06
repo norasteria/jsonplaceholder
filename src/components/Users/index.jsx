@@ -27,7 +27,7 @@ class Users extends Component {
   }
 
   goToProfile = (userId) => {
-    return <a href={`/profile/${userId}`}>Go to profile</a>;
+    return <a href={`/profile/${userId}/posts`}>Go to profile</a>;
   };
 
   panelMapRender = (user, index) => (

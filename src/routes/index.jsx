@@ -15,7 +15,10 @@ export default class Routes extends Component {
         <Switch>
           <Layout>
             <Route exact path={["/", "/users"]} component={Users} />
-            <Route path="/profile/:userId" component={Profile} />
+            <Route
+              path="/profile/:userId/:profileContent"
+              component={Profile}
+            />
           </Layout>
         </Switch>
       </Router>

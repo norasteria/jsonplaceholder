@@ -1,49 +1,19 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { withRouter } from "react-router-dom";
-import { List } from "antd";
+import { withRouter, Route } from "react-router-dom";
 
 import "./index.css";
-import { fetchAlbums } from "../profile.action";
-import { userAlbum as selectAlbum } from "../profile.selector";
-
-const mapActionToProps = { fetchAlbums };
-
-const mapStateToProps = (state) => ({
-  albumsList: selectAlbum(state),
-});
+import PhotoList from "./PhotoList";
+import AlbumList from "./AlbumList";
 
 class ProfileAlbum extends Component {
-  componentDidMount() {
-    console.clear();
-    console.log({ props: this.props });
-
-    const { params } = this.props.match;
-    this.props.fetchAlbums(params);
-  }
-
-  listItemRender = (item) => {
-    return (
-      <List.Item actions={[<a href="galery">See photos</a>]}>
-        {item.title}
-      </List.Item>
-    );
-  };
-
   render() {
     return (
       <div>
-        <List
-          dataSource={this.props.albumsList}
-          renderItem={this.listItemRender}
-        />
+        <Route exact path={this.props.match.path} component={AlbumList} />
+        <Route path={`${this.props.match.path}/photos`} component={PhotoList} />
       </div>
     );
   }
 }
 
-export default compose(
-  withRouter,
-  connect(mapStateToProps, mapActionToProps)
-)(ProfileAlbum);
+export default withRouter(ProfileAlbum);

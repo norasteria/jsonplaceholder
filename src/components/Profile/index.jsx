@@ -38,8 +38,11 @@ class Profile extends Component {
     );
   };
 
+  onTabClick = (key) => this.props.history.push(key);
+
   render() {
     const InfoRender = this.infoRender;
+    const { profileContent } = this.props.match.params;
 
     return (
       <div>
@@ -48,12 +51,12 @@ class Profile extends Component {
           <Divider orientation="left">Info</Divider>
           <InfoRender />
 
-          <Tabs>
-            <TabPane tab="Posts" key={1}>
+          <Tabs activeKey={profileContent} onTabClick={this.onTabClick}>
+            <TabPane tab="Posts" key="posts">
               <Posts />
             </TabPane>
 
-            <TabPane tab="Galery" key={2}>
+            <TabPane tab="Galery" key="galery">
               <Galery />
             </TabPane>
           </Tabs>
