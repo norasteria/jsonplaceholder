@@ -57,7 +57,13 @@ class ProfilePosts extends Component {
   };
 
   commentOnClick = (postId) => {
-    const { selectedPostId } = this.state;
+    let { selectedPostId } = this.state;
+
+    if (selectedPostId.includes(postId)) {
+      return this.setState({
+        selectedPostId: selectedPostId.filter((id) => id !== postId),
+      });
+    }
     selectedPostId.push(postId);
     this.props.fetchComments(postId);
     this.setState({ selectedPostId });
