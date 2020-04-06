@@ -6,6 +6,7 @@ import {
   setPageLoading,
   getPosts,
   getComment,
+  getAlbumList,
 } from "./profile.reducer";
 
 export const fetchPosts = (params) => (dispatch) => {
@@ -29,5 +30,11 @@ export const fetchSelectedUserDetail = (params) => (dispatch) => {
 export const fetchComments = (postId) => (dispatch) => {
   Api.get(endpoints.comments, { params: { postId } }).then(({ data }) =>
     dispatch(getComment({ [postId]: data }))
+  );
+};
+
+export const fetchAlbums = (params) => (dispatch) => {
+  Api.get(endpoints.albums, { params }).then(({ data }) =>
+    dispatch(getAlbumList(data))
   );
 };

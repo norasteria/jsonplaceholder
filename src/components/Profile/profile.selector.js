@@ -9,3 +9,5 @@ export const userPostsLoading = ({ profileProps }) =>
   profileProps.loading.posts;
 
 export const userComments = ({ profileProps }) => profileProps.comments;
+
+export const userAlbum = ({ profileProps }) => profileProps.albums;

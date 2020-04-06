@@ -5,6 +5,8 @@ const INITIAL_STATE = {
   userProfile: {},
   posts: [],
   comments: {},
+  albums: [],
+  photos: [],
   loading: {
     mainPage: false,
     posts: false,
@@ -12,11 +14,12 @@ const INITIAL_STATE = {
   },
 };
 
-const [getProfile, getPosts, getComment, setPageLoading] = [
+const [getProfile, getPosts, getComment, setPageLoading, getAlbumList] = [
   "GET_PROFILE",
   "GET_POSTS",
   "GET_POSTS_COMMENT",
   "SET_PAGE_LOADING",
+  "GET_ALBUM_LIST",
 ].map(createAction);
 
 export default createReducer(
@@ -28,8 +31,10 @@ export default createReducer(
       update(state, { loading: { $merge: payload } }),
     [getComment]: (state, payload) =>
       update(state, { comments: { $merge: payload } }),
+    [getAlbumList]: (state, payload) =>
+      update(state, { albums: { $set: payload } }),
   },
   INITIAL_STATE
 );
 
-export { getProfile, setPageLoading, getPosts, getComment };
+export { getProfile, setPageLoading, getPosts, getComment, getAlbumList };

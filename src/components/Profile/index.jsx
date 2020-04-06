@@ -4,7 +4,7 @@ import { Tabs, Divider, Spin } from "antd";
 
 import Title from "../common/pageTitle";
 import Posts from "./ProfilePosts";
-import Album from "./ProfileAlbum";
+import Galery from "./ProfileGalery";
 import { fetchSelectedUserDetail } from "./profile.action";
 import {
   userProfileLoading as selectLoading,
@@ -53,8 +53,8 @@ class Profile extends Component {
               <Posts />
             </TabPane>
 
-            <TabPane tab="Album" key={2}>
-              <Album />
+            <TabPane tab="Galery" key={2}>
+              <Galery />
             </TabPane>
           </Tabs>
         </Spin>
