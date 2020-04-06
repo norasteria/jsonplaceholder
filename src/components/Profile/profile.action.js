@@ -1,7 +1,12 @@
 import { Api, endpoints } from "../../module/API";
 import getUserData from "../../module/general-services/getUserData";
 
-import { getProfile, setPageLoading, getPosts } from "./profile.reducer";
+import {
+  getProfile,
+  setPageLoading,
+  getPosts,
+  getComment,
+} from "./profile.reducer";
 
 export const fetchPosts = (params) => (dispatch) => {
   dispatch(setPageLoading({ posts: true }));
@@ -19,4 +24,10 @@ export const fetchSelectedUserDetail = (params) => (dispatch) => {
   getUserData(params)
     .then(([userData]) => dispatch(getProfile(userData)))
     .finally(() => dispatch(setPageLoading({ mainPage: false })));
+};
+
+export const fetchComments = (postId) => (dispatch) => {
+  Api.get(endpoints.comments, { params: { postId } }).then(({ data }) =>
+    dispatch(getComment({ [postId]: data }))
+  );
 };

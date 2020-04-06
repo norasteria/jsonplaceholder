@@ -7,3 +7,5 @@ export const userPosts = ({ profileProps }) => profileProps.posts;
 
 export const userPostsLoading = ({ profileProps }) =>
   profileProps.loading.posts;
+
+export const userComments = ({ profileProps }) => profileProps.comments;

@@ -2,33 +2,82 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { Card, Spin } from "antd";
+import { Card, Spin, Button, Divider } from "antd";
 
 import "./ProfilePosts.css";
-import { fetchPosts } from "./profile.action";
+import { fetchPosts, fetchComments } from "./profile.action";
 import {
   userPosts as selectPosts,
   userPostsLoading as selectLoading,
+  userComments as selectComment,
 } from "./profile.selector";
 
-const mapActionToProps = { fetchPosts };
+const mapActionToProps = { fetchPosts, fetchComments };
 
 const mapStateToProps = (state) => ({
   posts: selectPosts(state),
   loading: selectLoading(state),
+  commentsData: selectComment(state),
 });
 
 class ProfilePosts extends Component {
+  state = {
+    selectedPostId: [],
+    showAddCommentForm: false,
+  };
+
   componentDidMount() {
     const { params } = this.props.match;
     this.props.fetchPosts(params);
   }
 
-  postsCardRender = () => {
-    return this.props.posts.map((post) => (
-      <Card className="post-card" title={post.title}>
-        {post.body}
+  commentRender = ({ postId }) => {
+    const { selectedPostId } = this.state;
+
+    if (!selectedPostId.includes(postId)) return null;
+    const commentData = this.props.commentsData[postId];
+
+    return (
+      <Card>
+        {commentData &&
+          commentData.map((comment, index) => (
+            <div key={index}>
+              <div>
+                <p>
+                  <b>{comment.name}</b> <br />
+                  <div className="comment-email">{comment.email}</div>
+                </p>
+              </div>
+              <div className="post-comment">{comment.body}</div>
+              <Divider />
+            </div>
+          ))}
       </Card>
+    );
+  };
+
+  commentOnClick = (postId) => {
+    const { selectedPostId } = this.state;
+    selectedPostId.push(postId);
+    this.props.fetchComments(postId);
+    this.setState({ selectedPostId });
+  };
+
+  postsCardRender = () => {
+    const CommentsRender = this.commentRender;
+
+    return this.props.posts.map((post, index) => (
+      <div key={index}>
+        <Card className="post-card" title={post.title}>
+          <div>{post.body}</div>
+
+          <Button type="link" onClick={() => this.commentOnClick(post.id)}>
+            comments
+          </Button>
+
+          <CommentsRender postId={post.id} />
+        </Card>
+      </div>
     ));
   };
 

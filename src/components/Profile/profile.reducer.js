@@ -4,7 +4,7 @@ import update from "immutability-helper";
 const INITIAL_STATE = {
   userProfile: {},
   posts: [],
-  comments: [],
+  comments: {},
   loading: {
     mainPage: false,
     posts: false,
@@ -26,8 +26,10 @@ export default createReducer(
     [getPosts]: (state, payload) => update(state, { posts: { $set: payload } }),
     [setPageLoading]: (state, payload) =>
       update(state, { loading: { $merge: payload } }),
+    [getComment]: (state, payload) =>
+      update(state, { comments: { $merge: payload } }),
   },
   INITIAL_STATE
 );
 
-export { getProfile, setPageLoading, getPosts };
+export { getProfile, setPageLoading, getPosts, getComment };
