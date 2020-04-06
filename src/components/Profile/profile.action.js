@@ -7,6 +7,7 @@ import {
   getPosts,
   getComment,
   getAlbumList,
+  getPhotoByAlbum,
 } from "./profile.reducer";
 
 export const fetchPosts = (params) => (dispatch) => {
@@ -36,5 +37,11 @@ export const fetchComments = (postId) => (dispatch) => {
 export const fetchAlbums = (params) => (dispatch) => {
   Api.get(endpoints.albums, { params }).then(({ data }) =>
     dispatch(getAlbumList(data))
+  );
+};
+
+export const fetchPhotoByAlbumId = (albumId) => (dispatch) => {
+  Api.get(endpoints.photos, { params: { albumId } }).then(({ data }) =>
+    dispatch(getPhotoByAlbum(data))
   );
 };

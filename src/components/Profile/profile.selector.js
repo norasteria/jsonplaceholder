@@ -11,3 +11,5 @@ export const userPostsLoading = ({ profileProps }) =>
 export const userComments = ({ profileProps }) => profileProps.comments;
 
 export const userAlbum = ({ profileProps }) => profileProps.albums;
+
+export const userPhotoByAlbum = ({ profileProps }) => profileProps.photos;
