@@ -38,7 +38,10 @@ class Profile extends Component {
     );
   };
 
-  onTabClick = (key) => this.props.history.push(key);
+  onTabClick = (profileContet) => {
+    const { userId } = this.props.match.params;
+    this.props.history.push(`/profile/${userId}/${profileContet}`);
+  };
 
   render() {
     const InfoRender = this.infoRender;
