@@ -24,6 +24,8 @@ export default createReducer(
     [getProfile]: (state, payload) =>
       update(state, { userProfile: { $set: payload } }),
     [getPosts]: (state, payload) => update(state, { posts: { $set: payload } }),
+    [setPageLoading]: (state, payload) =>
+      update(state, { loading: { $merge: payload } }),
   },
   INITIAL_STATE
 );
