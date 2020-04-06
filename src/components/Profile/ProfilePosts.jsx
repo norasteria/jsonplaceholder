@@ -45,7 +45,7 @@ class ProfilePosts extends Component {
               <div>
                 <p>
                   <b>{comment.name}</b> <br />
-                  <div className="comment-email">{comment.email}</div>
+                  <span className="comment-email">{comment.email}</span>
                 </p>
               </div>
               <div className="post-comment">{comment.body}</div>
